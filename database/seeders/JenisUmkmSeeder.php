@@ -30,7 +30,8 @@ class JenisUmkmSeeder extends Seeder
             ['jenis_umkm'=>'Pos, telekomunikasi, penyiaran, serta sistem dan transaksi elektronik'],
             ['jenis_umkm'=>'Pertahanan dan keamanan'],
             ['jenis_umkm'=>'Ketenagakerjaan'],
-            ['jenis_umkm'=>'Keuangan']
+            ['jenis_umkm'=>'Keuangan'],
+            ['jenis_umkm'=>'Busana']
         ];
 
         DB::table('jenis_umkms')->insert($jenis_umkms);

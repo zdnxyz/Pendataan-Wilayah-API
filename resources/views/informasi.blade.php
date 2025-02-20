@@ -84,6 +84,16 @@
                  setelah disetujui, anda akan dibuatkan akun untuk masuk ke halaman dasbor umkm, disana anda bisa memasukkan kembali data legalitas usaha tersebut untuk melengkapi profil
                 dan mengelola dasbor umkm anda.</p>
         </div>
+        <div class="section">
+            <p>Anda bisa menghubungi nomor dibawah ini untuk informasi mengenai pendaftaran lebih lanjut :</p>
+            <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                <strong>Telepon:</strong> (+62) 812-3456-7890
+                <br> 
+                <strong>WhatsApp:</strong> (+62) 812-3456-7890
+                <br>
+                <strong>Telegram</strong> 
+            </p>
+        </div>
       <footer class="footer pt-3">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-lg-between">

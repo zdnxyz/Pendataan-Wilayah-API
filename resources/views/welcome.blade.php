@@ -82,40 +82,56 @@
         }
 
         .sidebar a:nth-child(5):before {
-            content: '0.4';
+            content: '✿';
         }
 
         .sidebar a:hover {
             color: #a9715a;
         }
 
-        .sidebar .lets-talk {
-            margin-top: auto;
-            padding: 20px;
-            font-size: 24px;
-            color: white;
-            text-align: center;
+
+        .sidebar-footer {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        text-align: center;
+        font-size: 12px;
+        color: white;
+}
+
+        .sidebar-footer p {
+            margin-bottom: 8px;
+            opacity: 0.8;
+            font-weight: 600;
         }
 
-        .sidebar .lets-talk-btn {
-            background-color: #a9715a;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px; /* Menyesuaikan jarak antar elemen */
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #a9715a;
             font-size: 12px;
             font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
         }
 
-        .sidebar .lets-talk-btn:hover {
-            background-color: #a9715a;
+        .footer-links span {
+            color: white;
+            font-size: 12px;
+            opacity: 0.8;
         }
+
+        /* Menghapus ikon ✿ dari link di footer */
+        .sidebar-footer a:before {
+            content: none !important;
+        }
+
 
         /* Tombol Toggle */
         .toggle-btn {
@@ -229,7 +245,43 @@
             padding-right: 50px;
         }
 
-        
+        .footer {
+    background: #a9715a;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #a9715a;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.footer p {
+    margin: 0;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.footer strong {
+    font-weight: bold;
+}
+
+.social-icons a {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #171719;
+}
+
 
     </style>
 </head>
@@ -242,6 +294,29 @@
         <a href="#">Beranda</a>
         <a href="{{ url('/about') }}">Tentang</a>
         <a href="{{ url('/info') }}">Informasi</a>
+        <a href="{{ Auth::check() ? 
+        (Auth::user()->can('view_masterAdmin') ? url('/dashboard') :
+        (Auth::user()->can('view_admin') ? url('/dashboard-admin') :
+        (Auth::user()->can('view_umkm') ? url('/umkm') :
+        (Auth::user()->can('view_investor') ? url('/investor') : url('/dashboard'))))) 
+        : url('/login') }}">
+        {{ Auth::check() ? 
+        (Auth::user()->can('view_masterAdmin') ? 'Dasbor' :
+        (Auth::user()->can('view_admin') ? 'Dasbor' :
+        (Auth::user()->can('view_umkm') ? 'Dasbor' :
+        (Auth::user()->can('view_investor') ? 'Dasbor' : 'Dasbor')))) 
+        : 'Login' }}
+    </a>
+    <div class="sidebar-footer">
+        <p>© 2024-2025 PUKB. All rights reserved</p>
+        <div class="footer-links">
+            <a href="{{ url('/') }}">Security</a>
+            <span>|</span>
+            <a href="{{ url('/') }}">Privacy & Cookie Policy</a>
+            <span>|</span>
+            <a href="{{ url('/') }}">Terms of Service</a>
+        </div>
+    </div>
     </div>
     <!-- Welcome Section -->
     <div class="welcome">
@@ -451,15 +526,17 @@
         </div>
     </div>  
     {{-- Footer --}}
-    <footer style="background-color: #333; color: white; text-align: center; padding: 20px; position: relative; bottom: 0; width: 100%;">
-        <p>&copy; 2025 Zidan. All Rights Reserved.</p>
-        <p>
-            <a href="#" style="color: #f1c40f; text-decoration: none; margin: 0 10px;">Tentang</a>
-            <a href="#" style="color: #f1c40f; text-decoration: none; margin: 0 10px;">Kontak</a>
-            <a href="#" style="color: #f1c40f; text-decoration: none; margin: 0 10px;">Privasi</a>
-        </p>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2024-2025 PUKB, <strong>All Rights Reserved</strong></p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
     </footer>
-
+{{-- End Footer --}}
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
@@ -492,6 +569,30 @@
                 imageElement.msRequestFullscreen();
             }
         }
+
+        function checkLoginStatus() {
+            return localStorage.getItem("loggedIn") === "true";
+        }
+
+        function handleLogin() {
+            if (!checkLoginStatus()) {
+                // Simulasi login sukses
+                localStorage.setItem("loggedIn", "true");
+                window.location.href = "dashboard.html";
+            } else {
+                window.location.href = "dashboard.html";
+            }
+        }
+
+        function updateButton() {
+            const loginButton = document.getElementById("loginButton");
+            if (checkLoginStatus()) {
+                loginButton.textContent = "Masuk ke Dasbor";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", updateButton);
+
     </script>
 
 </body>
