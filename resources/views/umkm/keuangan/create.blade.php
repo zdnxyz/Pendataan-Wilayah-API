@@ -16,31 +16,13 @@
                                         <td>
                                             <div class="d-flex px-5 py-1">
                                                 <div class="row w-100">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pilih Bulan:</label>
-                                                            <select name="bulan" class="form-control" required>
-                                                                @foreach (['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'] as $bulan)
-                                                                    <option value="{{ $bulan }}" {{ old('bulan') == $bulan ? 'selected' : '' }}>{{ $bulan }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            @error('bulan')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
+                                                   
 
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pilih Tahun:</label>
-                                                            <select name="tahun" class="form-control" required>
-                                                                @foreach (range(date('Y'), date('Y') + 50) as $tahun)
-                                                                    <option value="{{ $tahun }}" {{ old('tahun') == $tahun ? 'selected' : '' }}>{{ $tahun }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            @error('tahun')
+                                                            <label class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tanggal Input Keuangan:</label>
+                                                            <input type="datetime-local" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" placeholder="Masukkan lokasi meeting" aria-label="Masukkan tanggal meeting" autofocus>
+                                                            @error('tanggal')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>

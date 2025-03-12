@@ -14,8 +14,8 @@
             margin: 0;
             padding: 0;
             font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-            background-color: #a9715a;
-            color: rgb(255, 255, 255);
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
             display: flex;
             justify-content: center;
             align-items: center;

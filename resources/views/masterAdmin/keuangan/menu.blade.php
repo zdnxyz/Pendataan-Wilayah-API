@@ -1,4 +1,4 @@
-@extends('layouts.umkm')
+@extends('layouts.masterAdmin')
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
 @endsection
@@ -8,24 +8,22 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>Daftar Data Keuangan ({{ \Carbon\Carbon::now()->locale('id')->translatedFormat('F Y') }})</h6>
+                    <h6>Data Laporan Keuangan ({{ \Carbon\Carbon::now()->locale('id')->translatedFormat('F Y') }})</h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-0">
                     <div class="table-responsive p-5 pt-0">
-                        <div class="d-flex justify-content-start p-0">
-                            <a href="{{ route('Umkmkeuangan.create') }}" class="btn btn-primary">Tambah Daftar Keuangan <i
-                                    class="fa fa-sharp fa-light fa-arrow-right"></i></a>
-                        </div>
+                       
                         <table id="myTable" class="table align-items-center mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Umkm</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Input</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pemasukkan</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pengeluaran</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Keuntungan/Kerugian</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bukti Transaksi</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hapus</th>
+                                    {{-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bukti Transaksi</th> --}}
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,6 +34,14 @@
                                             <div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-secondary text-sm">{{ $no++ }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $data->user->name }}</h6>
+                                                    <p class="text-xs text-secondary mb-0">{{ $data->user->email }}</p>
                                                 </div>
                                             </div>
                                         </td>
@@ -69,20 +75,21 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <img src="{{ Storage::url($data->bukti_transaksi) }}" width="50" class="img-thumbnail" style="border-radius: 50%">
                                                 </div>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                         <td class="d-flex justify-content-center">
                                             <form id="delete-form-{{ $data->id }}" action="{{ route('Umkmkeuangan.destroy', $data->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" onclick="confirmDelete({{ $data->id }})" class="btn btn-danger">
-                                                    <i class="fa fa-ban"></i>
-                                                </button>
+                                                <a href="{{ route('Master Adminkeuangan.show', $data->id) }}"
+                                                    class="btn btn-success">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
                                             </form>
                                         </td>
                                     </tr>

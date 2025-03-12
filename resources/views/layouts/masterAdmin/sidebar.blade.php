@@ -35,8 +35,18 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('dashboard/laporan*') ? 'active' : '' }}"
-                    href="{{ route('Master Adminlaporan.index') }}">
+                <a class="nav-link {{ request()->is('dashboard/cek-legal/menu*') ? 'active' : '' }}"
+                    href="{{ route('Master AdminlegalUsaha.menu') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-archive-2 text-danger text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Cek Legalitas</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('dashboard/keuangan/menu*') ? 'active' : '' }}"
+                    href="{{ route('Master Adminkeuangan.menu') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-money-coins text-success text-sm opacity-10"></i>

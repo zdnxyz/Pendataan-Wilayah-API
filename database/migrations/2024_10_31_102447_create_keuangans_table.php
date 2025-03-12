@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('keuangans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_umkm')->constrained('users')->onDelete('cascade');
-            $table->string('bulan');
-            $table->integer('tahun');
+            $table->unsignedBigInteger('id_umkm');
+            $table->foreign('id_umkm')->references('id')->on('users')->onDelete('cascade');
+            $table->date('tanggal');
             $table->integer('income');
             $table->integer('outcome');
             $table->integer('profit_loss');

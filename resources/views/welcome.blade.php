@@ -62,7 +62,7 @@
             font-size: 14px;
             margin-right: 1px;
             padding-bottom: 15px;
-            color: #a9715a;
+            color: #5E72E4;
             width: 24px;
             /* width of the number container */
             text-align: center;
@@ -86,7 +86,7 @@
         }
 
         .sidebar a:hover {
-            color: #a9715a;
+            color: #5E72E4;
         }
 
 
@@ -116,7 +116,7 @@
 
         .footer-links a {
             text-decoration: none;
-            color: #a9715a;
+            color: #5E72E4;
             font-size: 12px;
             font-weight: 600;
         }
@@ -155,7 +155,7 @@
         }
 
         .toggle-btn:hover {
-            background: #a9715a;
+            background: #5E72E4;
         }
 
         .open .toggle-btn {
@@ -181,7 +181,7 @@
         }
 
         .close-btn:hover {
-            background: #a9715a;
+            background: #5E72E4;
         }
 
         /* Animasi Saat Dibuka */
@@ -204,7 +204,7 @@
             height: 100vh;
             text-align: left;
             padding: 0 90px;
-            background: url('https://i.ibb.co.com/DDjH9Tmq/background.png') no-repeat center center/cover;
+            background: url('https://i.ibb.co.com/fYdnFfH5/background.png') no-repeat center center/cover;
             width: 100%;
             background-size: cover;
             position: relative;
@@ -221,7 +221,7 @@
         }
 
         .lihat-selengkapnya-btn {
-            background-color: #a9715a;
+            background-color: #5E72E4;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -233,7 +233,7 @@
         }
 
         .lihat-selengkapnya-btn:hover {
-            background-color: #a9715a;
+            background-color: #5E72E4;
         }
 
         .container-fluid {
@@ -246,12 +246,12 @@
         }
 
         .footer {
-    background: #a9715a;
+    background: #5E72E4;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #a9715a;
+    border-top: 1px solid #5E72E4;
 }
 
 .footer-content {
@@ -338,7 +338,7 @@
         style="height: 100vh; background-color: #171719;">
         <div class="row align-items-center h-100">
             <div class="col-lg-4 text-start" style="max-width: 300px; margin: 0 auto; padding-top: 50px;">
-                <h3 style="color: #a9715a; font-weight: 400; font-size: 20px; margin-bottom: 10px;">1.1</h3>
+                <h3 style="color: #5E72E4; font-weight: 400; font-size: 20px; margin-bottom: 10px;">1.1</h3>
                 <h4 style="font-weight: 500; margin-bottom: 20px;">Penggunaan</h4>
                 <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
                     Pengguna dapat melakukan pencarian dan informasi data UMKM dengan menggunakan maps interaktif,
@@ -346,7 +346,7 @@
                 </p>
             </div>
             <div class="col-lg-4 text-start" style="max-width: 300px; margin: 0 auto;">
-                <h3 style="color: #a9715a; font-weight: 400; font-size: 20px; margin-bottom: 10px;">2.2</h3>
+                <h3 style="color: #5E72E4; font-weight: 400; font-size: 20px; margin-bottom: 10px;">2.2</h3>
                 <h4 style="font-weight: 500; margin-bottom: 15px;">Pengelolaan</h4>
                 <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
                     Pengelolaan dilakukan dengan aman dan terstruktur, memastikan informasi legalitas dan
@@ -354,7 +354,7 @@
                 </p>
             </div>
             <div class="col-lg-4 text-start" style="max-width: 300px; margin: 0 auto;">
-                <h3 style="color: #a9715a; font-weight: 400; font-size: 20px; margin-bottom: 10px;">3.3</h3>
+                <h3 style="color: #5E72E4; font-weight: 400; font-size: 20px; margin-bottom: 10px;">3.3</h3>
                 <h4 style="font-weight: 500; margin-bottom: 15px;">Pengembangan</h4>
                 <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
                     Kami terus mengembangkan fitur-fitur baru untuk mendukung UMKM dalam berekspansi, termasuk ke pasar
@@ -422,12 +422,12 @@
 
             <div class="col-md-6 text-start pe-5">
                 <h5 style="font-size: 1.5rem; font-weight: 500;">
-                    <span style="color: #a9715a;">1.0</span> Fitur Dasbor UMKM
+                    <span style="color: #5E72E4;">1.0</span> Fitur Dasbor UMKM
                 </h5>
                 <p style="font-size: 0.9rem;">Ini adalah beberapa fitur dari web ini</p>
                 <br>
                 <h5 style="font-size: 1.5rem; font-weight: 500;">
-                    <span style="color: #a9715a;">2.0</span> Penjelasan Fitur Web
+                    <span style="color: #5E72E4;">2.0</span> Penjelasan Fitur Web
                 </h5>
                 <p style="font-size: 0.9rem; line-height: normal; text-align: left;">Pengguna dapat menginput pendataan
                     komoditi UMKM di daerah Kabupaten Bandung. Maps interaktif sebagai alat utama untuk menyajikan
@@ -443,12 +443,12 @@
             <!-- Bagian teks di kiri -->
             <div class="col-md-6 text-start ps-5">
                 <h5 style="font-size: 1.5rem; font-weight: 500;">
-                    <span style="color: #a9715a;">1.0</span> Fitur Dasbor Investor
+                    <span style="color: #5E72E4;">1.0</span> Fitur Dasbor Investor
                 </h5>
                 <p style="font-size: 0.9rem;">Berikut adalah beberapa fitur dari web ini</p>
                 <br>
                 <h5 style="font-size: 1.5rem; font-weight: 500;">
-                    <span style="color: #a9715a;">2.0</span> Penjelasan mengenai Fitur Web ini
+                    <span style="color: #5E72E4;">2.0</span> Penjelasan mengenai Fitur Web ini
                 </h5>
                 <p style="font-size: 0.9rem; line-height: normal;">
                     Pengguna dapat mencari informasi lokasi UMKM di wilayah Kabupaten Bandung dengan menggunakan maps

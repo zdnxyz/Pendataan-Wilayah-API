@@ -59,9 +59,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'can:view_master
     Route::resource('spot', LokasiUmkmController::class); //menampilkan data lokasi umkm
     Route::resource('centre-point', CentrePointController::class); //latihan
 
-    // Tambahan: Laporan Keuangan untuk Master Admin
-    Route::get('laporan-keuangan', [KeuanganController::class, 'index'])->name('laporan-keuangan.index');
-    Route::get('laporan-keuangan/{id}', [KeuanganController::class, 'show'])->name('laporan-keuangan.show');
+    Route::get('/keuangan/menu', [KeuanganController::class, 'menu'])->name('keuangan.menu');
+    Route::get('/keuangan/menu/show/{id}', [KeuanganController::class, 'show'])->name('keuangan.show');
+
+    Route::get('/cek-legal/menu', [LegalUsahaController::class, 'menu'])->name('legalUsaha.menu');
+    Route::get('/cek-legal/menu/show/{id}', [LegalUsahaController::class, 'show'])->name('legalUsaha.show');
+    Route::get('/cek-legal/notifications', [LegalUsahaController::class, 'getNotifications'])->name('legal.notification');
 });
 Route::get('/centre-point/data', [DataController::class,'centrepoint'])->name('centre-point.data');
 

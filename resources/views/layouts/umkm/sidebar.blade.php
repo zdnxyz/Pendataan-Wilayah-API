@@ -56,9 +56,9 @@
                     href="{{ route('Umkmoperasional.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-industry text-warning text-sm opacity-10"></i>
+                        <i class="ni ni-single-02 text-warning text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Karyawan</span> {{-- ada berapa karyawannya --}}
+                    <span class="nav-link-text ms-1">Operasional</span> {{-- ada berapa karyawannya --}}
                 </a>
             </li>
             <li class="nav-item">
