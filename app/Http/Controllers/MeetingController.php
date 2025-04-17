@@ -10,31 +10,41 @@ use Alert;
 
 class MeetingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Admin melihat daftar meeting yang menunggu verifikasi
+    public function menu()
+    {
+        $title = 'Daftar Meeting';
+        $meetings = Meeting::where('status_verifikasi', 'Menunggu')->get()->map(function ($item) {
+            $item->tanggal = \Carbon\Carbon::parse($item->tanggal)->format('Y-m-d');
+            return $item;
+        });
+
+        return view('masterAdmin.meeting.menu', compact('meetings', 'title'));
+    }
+
+    // Investor melihat daftar meeting miliknya
     public function index()
     {
         $title = 'Daftar Meeting';
         $umkm = User::role('umkm')->get();
-        $meeting = Meeting::where('id_investor', auth()->id())->get();
-        // dd($umkm);
+        $meeting = Meeting::where('id_investor', auth()->id())->get()->map(function ($item) {
+            $item->tanggal = \Carbon\Carbon::parse($item->tanggal)->format('Y-m-d');
+            return $item;
+        });
+
         return view('investor.meeting.index', compact('umkm', 'meeting', 'title'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Form tambah meeting
     public function create()
     {
         $title = 'Tambahkan Jadwal Meeting';
         $umkm = User::role('umkm')->get();
+
         return view('investor.meeting.create', compact('umkm', 'title'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Simpan meeting baru
     public function store(Request $request)
     {
         $request->validate([
@@ -50,45 +60,84 @@ class MeetingController extends Controller
         $meeting->lokasi_meeting = $request->lokasi_meeting;
         $meeting->tanggal = $request->tanggal;
         $meeting->id_investor = auth()->id();
+        $meeting->status_verifikasi = 'Menunggu';
         $meeting->save();
 
-        Alert::success('Success Title', "Data Berhasil Di Tambah")->autoClose(1000);
-        return redirect()->route('Investormeeting.index')->with('success', 'Data Berhasil di Tambah');
+        Alert::success('Sukses', "Data Berhasil Ditambahkan")->autoClose(1000);
+        return redirect()->route('Investormeeting.index')->with('success', 'Data Berhasil Ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Tampilkan detail meeting
     public function show(string $id)
     {
-        //
+        $meeting = Meeting::findOrFail($id);
+        $meeting->tanggal = \Carbon\Carbon::parse($meeting->tanggal)->format('Y-m-d');
+
+        return view('investor.meeting.show', compact('meeting'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Form edit meeting
     public function edit(string $id)
     {
-        //
+        $meeting = Meeting::findOrFail($id);
+        $meeting->tanggal = \Carbon\Carbon::parse($meeting->tanggal)->format('Y-m-d');
+        $umkm = User::role('umkm')->get();
+
+        return view('investor.meeting.edit', compact('meeting', 'umkm'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Update data meeting
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'id_umkm' => 'required|exists:users,id',
+            'judul' => 'required|string|max:255',
+            'lokasi_meeting' => 'required|string|max:255',
+            'tanggal' => 'required|date',
+        ]);
+
+        $meeting = Meeting::findOrFail($id);
+        $meeting->id_umkm = $request->id_umkm;
+        $meeting->judul = $request->judul;
+        $meeting->lokasi_meeting = $request->lokasi_meeting;
+        $meeting->tanggal = $request->tanggal;
+        $meeting->save();
+
+        Alert::success('Sukses', "Data Berhasil Diperbarui")->autoClose(1000);
+        return redirect()->route('Investormeeting.index')->with('success', 'Data Berhasil Diperbarui');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    // Verifikasi meeting (Disetujui atau Ditolak)
+    public function verifikasi(Request $request, string $id)
     {
         $meeting = Meeting::findOrFail($id);
 
+        if ($request->action === 'tolak') {
+            $meeting->status_verifikasi = 'Ditolak';
+            $meeting->save();
+
+            Alert::success('Sukses', "Meeting Ditolak")->autoClose(1000);
+            return redirect()->back()->with('success', 'Meeting berhasil ditolak.');
+        }
+
+        if ($request->action === 'setuju') {
+            $meeting->status_verifikasi = 'Disetujui';
+            $meeting->save();
+
+            Alert::success('Sukses', "Meeting Disetujui")->autoClose(1000);
+            return redirect()->back()->with('success', 'Meeting berhasil disetujui.');
+        }
+
+        return redirect()->back()->with('error', 'Aksi tidak dikenali.');
+    }
+
+    // Hapus data meeting
+    public function destroy(string $id)
+    {
+        $meeting = Meeting::findOrFail($id);
         $meeting->delete();
-        Alert::success('Success Title', "Data Berhasil Di Hapus")->autoClose(1000);
-        return redirect()->route('Investormeeting.index')->with('success', 'Data Berhasil di Hapus');
+
+        Alert::success('Sukses', "Data Meeting berhasil dihapus")->autoClose(1000);
+        return redirect()->back()->with('success', 'Data Meeting berhasil dihapus.');
     }
 }

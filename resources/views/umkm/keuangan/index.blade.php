@@ -23,8 +23,9 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Input</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pemasukkan</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pengeluaran</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Keuntungan/Kerugian</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bukti Transaksi</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Keuntungan</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bukti</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status Verifikasi</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Hapus</th>
                                 </tr>
                             </thead>
@@ -70,11 +71,22 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <img src="{{ Storage::url($data->bukti_transaksi) }}" width="50" class="img-thumbnail" style="border-radius: 50%">
-                                                </div>
-                                            </div>
+                                            <img src="{{ Storage::url($data->bukti_transaksi) }}" 
+                                                width="50" height="50" class="img-thumbnail preview-image"
+                                                style="border-radius: 10px; object-fit: cover; cursor: pointer;"
+                                                onclick="showImagePreview('{{ Storage::url($data->bukti_transaksi) }}')">
+                                        </td>                                      
+                                        <td style="color: black;">
+                                            @if ($data->status_verifikasi === 'Disetujui')
+                                                <span class="badge bg-success text-dark" style="font-weight: bold;">
+                                                    — Diterima —</span>
+                                            @elseif ($data->status_verifikasi === 'Ditolak')
+                                                <span class="badge bg-danger text-white" style="font-weight: bold;">
+                                                    — Ditolak —</span>
+                                            @else
+                                                <span class="badge bg-dark text-white" style="font-weight: 600;">
+                                                    — Menunggu —</span>
+                                            @endif
                                         </td>
                                         <td class="d-flex justify-content-center">
                                             <form id="delete-form-{{ $data->id }}" action="{{ route('Umkmkeuangan.destroy', $data->id) }}" method="POST" style="display:inline;">
@@ -103,9 +115,27 @@
     let table = new DataTable('#myTable');
 </script>
 
-<!-- Script SweetAlert -->
+<!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
+    // Fungsi untuk membuka gambar di modal
+    function showImagePreview(imageUrl) {
+        Swal.fire({
+            imageUrl: imageUrl,
+            imageWidth: '80%',
+            imageHeight: '80%',
+            imageAlt: 'Bukti Transaksi',
+            showConfirmButton: false,
+            background: '#000',
+            backdrop: 'rgba(0,0,0,0.8)',
+            customClass: {
+                popup: 'rounded-lg'
+            }
+        });
+    }
+
+    // Fungsi konfirmasi penghapusan
     function confirmDelete(userId) {
         Swal.fire({
             title: 'Hapus Data Keuangan ini!',

@@ -12,7 +12,6 @@
                 </div>
                 <div class="card-body px-0 pt-0 pb-0">
                     <div class="table-responsive p-5 pt-0">
-                       
                         <table id="myTable" class="table align-items-center mb-0">
                             <thead>
                                 <tr>
@@ -21,76 +20,28 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Input</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pemasukkan</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pengeluaran</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Keuntungan/Kerugian</th>
-                                    {{-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bukti Transaksi</th> --}}
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Aksi</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Keuntungan</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Bukti</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $no = 1; @endphp
                                 @foreach ($uang as $data)
                                     <tr>
+                                        <td><h6 class="mb-0 text-secondary text-sm">{{ $no++ }}</h6></td>
                                         <td>
-                                            <div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-secondary text-sm">{{ $no++ }}</h6>
-                                                </div>
-                                            </div>
+                                            <h6 class="mb-0 text-sm">{{ $data->user->name }}</h6>
+                                            <p class="text-xs text-secondary mb-0">{{ $data->user->email }}</p>
                                         </td>
+                                        <td><h6 class="mb-0 text-sm">{{ $data->tanggal }}</h6></td>
+                                        <td><h6 class="mb-0 text-sm">Rp {{ number_format($data->income, 0, ',', '.') }}</h6></td>
+                                        <td><h6 class="mb-0 text-sm">Rp {{ number_format($data->outcome, 0, ',', '.') }}</h6></td>
+                                        <td><h6 class="mb-0 text-sm">Rp {{ number_format($data->income - $data->outcome, 0, ',', '.') }}</h6></td>
                                         <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $data->user->name }}</h6>
-                                                    <p class="text-xs text-secondary mb-0">{{ $data->user->email }}</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $data->tanggal }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Rp {{ number_format($data->income, 0, ',', '.') }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Rp {{ number_format($data->outcome, 0, ',', '.') }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">
-                                                        Rp {{ number_format($data->income - $data->outcome, 0, ',', '.') }}
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        {{-- <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <img src="{{ Storage::url($data->bukti_transaksi) }}" width="50" class="img-thumbnail" style="border-radius: 50%">
-                                                </div>
-                                            </div>
-                                        </td> --}}
-                                        <td class="d-flex justify-content-center">
-                                            <form id="delete-form-{{ $data->id }}" action="{{ route('Umkmkeuangan.destroy', $data->id) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="{{ route('Master Adminkeuangan.show', $data->id) }}"
-                                                    class="btn btn-success">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                            </form>
+                                            <img src="{{ Storage::url($data->bukti_transaksi) }}" 
+                                                width="50" height="50" class="img-thumbnail preview-image"
+                                                style="border-radius: 10px; object-fit: cover; cursor: pointer;"
+                                                onclick="showImagePreview('{{ Storage::url($data->bukti_transaksi) }}')">
                                         </td>
                                     </tr>
                                 @endforeach
@@ -105,29 +56,21 @@
 
 @push('javascript')
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     let table = new DataTable('#myTable');
-</script>
 
-<!-- Script SweetAlert -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    function confirmDelete(userId) {
+    function showImagePreview(imageUrl) {
         Swal.fire({
-            title: 'Hapus Data Keuangan ini!',
-            text: "Apakah kamu yakin ingin menghapusnya?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, hapus!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('delete-form-' + userId).submit();
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire('Dibatalkan', 'Penghapusan user dibatalkan', 'error');
+            imageUrl: imageUrl,
+            imageWidth: '80%',
+            imageAlt: 'Bukti Transaksi',
+            showConfirmButton: false,
+            background: '#000',
+            backdrop: 'rgba(0,0,0,0.8)',
+            customClass: {
+                popup: 'rounded-lg'
             }
         });
     }

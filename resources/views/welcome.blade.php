@@ -13,277 +13,7 @@
     <!-- Add Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <title>Pendataan UMKM Kabupaten Bandung - PUKB</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-
-            height: 100vh;
-            background: #121212;
-            color: white;
-            transition: 0.3s;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 300px;
-            height: 100vh;
-            background: #121212;
-            color: white;
-            position: fixed;
-            left: -300px;
-            top: 0;
-            transition: 0.3s ease-in-out;
-            padding-top: 20px;
-            display: flex;
-            flex-direction: column;
-            padding-left: 30px;
-            z-index: 2;
-            /* Ensure the sidebar is above other content */
-        }
-
-        .sidebar a {
-            text-decoration: none;
-            color: white;
-            font-size: 24px;
-            font-weight: 600;
-            padding: 13px 0;
-            display: flex;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        .sidebar a:before {
-            font-size: 14px;
-            margin-right: 1px;
-            padding-bottom: 15px;
-            color: #5E72E4;
-            width: 24px;
-            /* width of the number container */
-            text-align: center;
-            /* center-align the numbers */
-        }
-
-        .sidebar a:nth-child(2):before {
-            content: '✿';
-        }
-
-        .sidebar a:nth-child(3):before {
-            content: '✿';
-        }
-
-        .sidebar a:nth-child(4):before {
-            content: '✿';
-        }
-
-        .sidebar a:nth-child(5):before {
-            content: '✿';
-        }
-
-        .sidebar a:hover {
-            color: #5E72E4;
-        }
-
-
-        .sidebar-footer {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80%;
-        text-align: center;
-        font-size: 12px;
-        color: white;
-}
-
-        .sidebar-footer p {
-            margin-bottom: 8px;
-            opacity: 0.8;
-            font-weight: 600;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px; /* Menyesuaikan jarak antar elemen */
-        }
-
-        .footer-links a {
-            text-decoration: none;
-            color: #5E72E4;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .footer-links span {
-            color: white;
-            font-size: 12px;
-            opacity: 0.8;
-        }
-
-        /* Menghapus ikon ✿ dari link di footer */
-        .sidebar-footer a:before {
-            content: none !important;
-        }
-
-
-        /* Tombol Toggle */
-        .toggle-btn {
-            font-size: 24px;
-            background: #121212;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border: none;
-            cursor: pointer;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            border-radius: 50%;
-            transition: 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 3;
-            /* Ensure the toggle button is above the sidebar */
-        }
-
-        .toggle-btn:hover {
-            background: #5E72E4;
-        }
-
-        .open .toggle-btn {
-            display: none;
-            /* Hide toggle button when sidebar is open */
-        }
-
-        /* Tombol Tutup */
-        .close-btn {
-            font-size: 24px;
-            background: #121212;
-            color: white;
-            width: 50px;
-            height: 50px;
-
-            border: none;
-            cursor: pointer;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            border-radius: 50%;
-            transition: 0.3s;
-        }
-
-        .close-btn:hover {
-            background: #5E72E4;
-        }
-
-        /* Animasi Saat Dibuka */
-        .open .sidebar {
-            left: 0;
-        }
-
-        .hubungi {
-            margin-top: 30px;
-            align-items: center;
-            margin-left: 64px;
-        }
-
-        /* Welcome Section */
-        .welcome {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            height: 100vh;
-            text-align: left;
-            padding: 0 90px;
-            background: url('https://i.ibb.co.com/fYdnFfH5/background.png') no-repeat center center/cover;
-            width: 100%;
-            background-size: cover;
-            position: relative;
-            z-index: 1;
-        }
-
-
-        .welcome .welcome-line {
-            font-size: 40px;
-            margin-bottom: 10px;
-            font-weight: 600;
-            line-height: 1.3;
-            color: #ffffff;
-        }
-
-        .lihat-selengkapnya-btn {
-            background-color: #5E72E4;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        .lihat-selengkapnya-btn:hover {
-            background-color: #5E72E4;
-        }
-
-        .container-fluid {
-            background-color: #171719 !important;
-        }
-
-        .container-fluid {
-            padding-left: 50px;
-            padding-right: 50px;
-        }
-
-        .footer {
-    background: #5E72E4;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #5E72E4;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-}
-
-.footer p {
-    margin: 0;
-    color: #ffffff;
-    font-size: 14px;
-}
-
-.footer strong {
-    font-weight: bold;
-}
-
-.social-icons a {
-    margin-left: 10px;
-    font-size: 16px;
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.social-icons a:hover {
-    color: #171719;
-}
-
-
-    </style>
+    <link rel="stylesheet" href="{{asset('welcome/css/style.css')}}">
 </head>
 
 <body>
@@ -293,7 +23,7 @@
         <button class="close-btn" onclick="toggleSidebar()">✖</button>
         <a href="#">Beranda</a>
         <a href="{{ url('/about') }}">Tentang</a>
-        <a href="{{ url('/info') }}">Informasi</a>
+        <a href="{{ url('/contactus') }}">Kontak Kami</a>
         <a href="{{ Auth::check() ? 
         (Auth::user()->can('view_masterAdmin') ? url('/dashboard') :
         (Auth::user()->can('view_admin') ? url('/dashboard-admin') :
@@ -301,10 +31,10 @@
         (Auth::user()->can('view_investor') ? url('/investor') : url('/dashboard'))))) 
         : url('/login') }}">
         {{ Auth::check() ? 
-        (Auth::user()->can('view_masterAdmin') ? 'Dasbor' :
-        (Auth::user()->can('view_admin') ? 'Dasbor' :
-        (Auth::user()->can('view_umkm') ? 'Dasbor' :
-        (Auth::user()->can('view_investor') ? 'Dasbor' : 'Dasbor')))) 
+        (Auth::user()->can('view_masterAdmin') ? 'Dashboard' :
+        (Auth::user()->can('view_admin') ? 'Dashboard' :
+        (Auth::user()->can('view_umkm') ? 'Dashboard' :
+        (Auth::user()->can('view_investor') ? 'Dashboard' : 'Dashboard')))) 
         : 'Login' }}
     </a>
     <div class="sidebar-footer">
@@ -334,7 +64,7 @@
             Selengkapnya</button>
     </div>
     {{-- Container1 --}}
-    <div class="container-fluid text-center text-light" id="selengkapnya"
+    <div class="container-fluid text-center text-dark" id="selengkapnya"
         style="height: 100vh; background-color: #171719;">
         <div class="row align-items-center h-100">
             <div class="col-lg-4 text-start" style="max-width: 300px; margin: 0 auto; padding-top: 50px;">
@@ -364,7 +94,7 @@
         </div>
     </div>
     {{-- Container2 --}}
-    <div class="container-fluid text-center bg-black text-light" style="height: 100vh; background-color: #171719;">
+    <div class="container-fluid text-center bg-black text-dark" style="height: 100vh; background-color: #171719;">
         <div class="row h-100 align-items-center">
             <div class="col-md-6 pe-5">
                 <div id="carouselContainer5" class="carousel slide" data-bs-ride="carousel"
@@ -385,24 +115,19 @@
                     <!-- Isi Carousel -->
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="http://localhost/Pendataan-Wilayah-API-master/public/welcome/umkm1.png"
-                                class="d-block w-100" alt="...">
+                            <img src="{{asset('welcome/umkm1.png')}}" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="http://localhost/Pendataan-Wilayah-API-master/public/welcome/umkm2.png"
-                                class="d-block w-100" alt="...">
+                            <img src="{{asset('welcome/umkm2.png')}}" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="http://localhost/Pendataan-Wilayah-API-master/public/welcome/umkm3.png"
-                                class="d-block w-100" alt="...">
+                            <img src="{{asset('welcome/umkm3.png')}}" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="http://localhost/Pendataan-Wilayah-API-master/public/welcome/umkm4.png"
-                                class="d-block w-100" alt="...">
+                            <img src="{{asset('welcome/umkm4.png')}}" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="http://localhost/Pendataan-Wilayah-API-master/public/welcome/umkm5.png"
-                                class="d-block w-100" alt="...">
+                            <img src="{{asset('welcome/umkm5.png')}}" class="d-block w-100" alt="...">
                         </div>
                     </div>
 
@@ -417,12 +142,12 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-                <p class="text-image">Gambar 1.0 Dasbor UMKM</p>
+                <p class="text-image">Gambar 1.0 Dashboard UMKM</p>
             </div>
 
             <div class="col-md-6 text-start pe-5">
                 <h5 style="font-size: 1.5rem; font-weight: 500;">
-                    <span style="color: #5E72E4;">1.0</span> Fitur Dasbor UMKM
+                    <span style="color: #5E72E4;">1.0</span> Fitur Dashboard UMKM
                 </h5>
                 <p style="font-size: 0.9rem;">Ini adalah beberapa fitur dari web ini</p>
                 <br>
@@ -437,13 +162,13 @@
         </div>
     </div>
     {{-- Container3 --}}
-    <div class="container-fluid text-center bg-black text-light"
+    <div class="container-fluid text-center bg-black text-dark"
         style="height: 100vh; background-color: #171719; background-size: cover; background-position: center;">
         <div class="row h-100 align-items-center">
             <!-- Bagian teks di kiri -->
             <div class="col-md-6 text-start ps-5">
                 <h5 style="font-size: 1.5rem; font-weight: 500;">
-                    <span style="color: #5E72E4;">1.0</span> Fitur Dasbor Investor
+                    <span style="color: #5E72E4;">1.0</span> Fitur Dashboard Investor
                 </h5>
                 <p style="font-size: 0.9rem;">Berikut adalah beberapa fitur dari web ini</p>
                 <br>
@@ -472,16 +197,13 @@
                     <!-- Isi Carousel -->
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="http://localhost/Pendataan-Wilayah-API-master/public/welcome/slide1.jpeg"
-                                class="d-block w-100" alt="...">
+                            <img src="{{asset('welcome/slide1.jpeg')}}" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="http://localhost/Pendataan-Wilayah-API-master/public/welcome/slide2.png"
-                                class="d-block w-100" alt="...">
+                            <img src="{{asset('welcome/slide2.png')}}" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="http://localhost/Pendataan-Wilayah-API-master/public/welcome/slide3.png"
-                                class="d-block w-100" alt="...">
+                            <img src="{{asset('welcome/slide3.png')}}" class="d-block w-100" alt="...">
                         </div>
                     </div>
 
@@ -496,39 +218,15 @@
                             <span class="visually-hidden">Next</span>
                         </button>
                 </div>
-                <p class="text-image">Gambar 2.0 Dasbor Investor</p>
+                <p class="text-image">Gambar 2.0 Dashboard Investor</p>
             </div>
         </div>
     </div>
-    {{-- Container4 --}}
-    <div class="container-fluid text-center text-light" id="selengkapnya"
-        style="height: 100vh; background-color: #171719;">
-        <div class="row align-items-center h-100">
-            <div class="col-lg-8 text-start" style="max-width: 600px; margin: 0 auto; padding-top: 50px;">
-                <h4 style="font-weight: 500; margin-bottom: 20px;">Hubungi Kami</h4>
-                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
-                    Kami siap membantu Anda mendapatkan informasi lebih lanjut mengenai layanan kami. Jangan ragu untuk
-                    menghubungi kami melalui kontak di bawah ini:
-                </p>
-                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
-                    <strong>Alamat Kantor:</strong> Jl. Raya Soreang No.123, Kabupaten Bandung, Jawa Barat, 40911
-                </p>
-                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
-                    <strong>Telepon:</strong> (+62) 812-3456-7890 / (+62) 812-3456-7890
-                </p>
-                <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
-                    <strong>Email:</strong> info@pwkb-bandung.id
-                </p>
-                <p style="font-size: 14px; line-height: 1.6;">
-                    <strong>Jam Operasional:</strong> Senin - Jumat | 08.00 - 17.00 WIB
-                </p>
-            </div>
-        </div>
-    </div>  
     {{-- Footer --}}
     <footer class="footer">
         <div class="footer-content">
             <p>© 2024-2025 PUKB, <strong>All Rights Reserved</strong></p>
+            <p style="padding-left: 760px;">Follow Our Social Media :</p>
             <div class="social-icons">
                 <a href="#"><i class="fab fa-facebook"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
@@ -587,7 +285,7 @@
         function updateButton() {
             const loginButton = document.getElementById("loginButton");
             if (checkLoginStatus()) {
-                loginButton.textContent = "Masuk ke Dasbor";
+                loginButton.textContent = "Masuk ke Dashboard";
             }
         }
 

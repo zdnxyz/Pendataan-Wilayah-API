@@ -13,7 +13,7 @@ class InvestorController extends Controller
      */
     public function index()
     {
-        $title = 'Dasbor';
+        $title = 'Dashboard';
 
         // panggil & hitung jumlah pengguna umkm
         $jmlUserUmkm = User::role('Umkm')->count();

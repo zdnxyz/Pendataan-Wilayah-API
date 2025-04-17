@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('outcome');
             $table->integer('profit_loss');
             $table->string('bukti_transaksi')->nullable();
+            $table->enum('status_verifikasi', ['Menunggu', 'Disetujui', 'Ditolak'])->default('Menunggu');
             $table->timestamps();
         });
     }

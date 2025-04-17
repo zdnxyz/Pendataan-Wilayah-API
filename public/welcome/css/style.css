@@ -1,0 +1,271 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+
+            height: 100vh;
+            background: #171719;
+            color: white;
+            transition: 0.3s;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            height: 100vh;
+            background: #171719;
+            color: white;
+            position: fixed;
+            left: -300px;
+            top: 0;
+            transition: 0.3s ease-in-out;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            padding-left: 30px;
+            z-index: 2;
+            /* Ensure the sidebar is above other content */
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            padding: 13px 0;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .sidebar a:before {
+            font-size: 14px;
+            margin-right: 1px;
+            padding-bottom: 15px;
+            color: #5E72E4;
+            width: 24px;
+            /* width of the number container */
+            text-align: center;
+            /* center-align the numbers */
+        }
+
+        .sidebar a:nth-child(2):before {
+            content: '✿';
+        }
+
+        .sidebar a:nth-child(3):before {
+            content: '✿';
+        }
+
+        .sidebar a:nth-child(4):before {
+            content: '✿';
+        }
+
+        .sidebar a:nth-child(5):before {
+            content: '✿';
+        }
+
+        .sidebar a:hover {
+            color: #5E72E4;
+        }
+
+
+        .sidebar-footer {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        text-align: center;
+        font-size: 12px;
+        color: white;
+}
+
+        .sidebar-footer p {
+            margin-bottom: 8px;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px; /* Menyesuaikan jarak antar elemen */
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #5E72E4;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .footer-links span {
+            color: white;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* Menghapus ikon ✿ dari link di footer */
+        .sidebar-footer a:before {
+            content: none !important;
+        }
+
+
+        /* Tombol Toggle */
+        .toggle-btn {
+            font-size: 24px;
+            background: #171719;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border: none;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            border-radius: 50%;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            /* Ensure the toggle button is above the sidebar */
+        }
+
+        .toggle-btn:hover {
+            background: #5E72E4;
+        }
+
+        .open .toggle-btn {
+            display: none;
+            /* Hide toggle button when sidebar is open */
+        }
+
+        /* Tombol Tutup */
+        .close-btn {
+            font-size: 24px;
+            background: #171719;
+            color: white;
+            width: 50px;
+            height: 50px;
+
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            background: #5E72E4;
+        }
+
+        /* Animasi Saat Dibuka */
+        .open .sidebar {
+            left: 0;
+        }
+
+        .hubungi {
+            margin-top: 30px;
+            align-items: center;
+            margin-left: 64px;
+        }
+
+        /* Welcome Section */
+        .welcome {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            text-align: left;
+            padding: 0 90px;
+            background: url('https://i.ibb.co.com/fYdnFfH5/background.png') no-repeat center center/cover;
+            width: 100%;
+            background-size: cover;
+            position: relative;
+            z-index: 1;
+        }
+
+
+        .welcome .welcome-line {
+            font-size: 40px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: #ffffff;
+        }
+
+        .lihat-selengkapnya-btn {
+            background-color: #5E72E4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .lihat-selengkapnya-btn:hover {
+            background-color: #5E72E4;
+        }
+
+        .container-fluid {
+            background-color: #ffffff !important;
+        }
+
+        .container-fluid {
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+
+        .footer {
+    background: #171719;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #171719;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.footer p {
+    margin: 0;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.footer strong {
+    font-weight: bold;
+}
+
+.social-icons a {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #171719;
+}
+
+#tentang-kami {
+    background-color: #4b943b;
+}

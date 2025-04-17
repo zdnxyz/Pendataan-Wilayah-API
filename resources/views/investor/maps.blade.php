@@ -195,7 +195,7 @@
                     <h3>${title}</h3>
                     <img src="${img}" alt="${nama}"/>
                     <div class="info">
-                        <div><strong>Nama:</strong> ${nama}</div>
+                        <div><strong>Nama Pemilik:</strong> ${nama}</div>
                         <div><strong>Kelamin:</strong> ${kelamin}</div>
                         <div><strong>Nama UMKM:</strong> ${namaUMKM}</div>
                         <div><strong>Desa:</strong> ${desa}</div>

@@ -29,8 +29,8 @@ Route::get('/about', function () {
     return view('tentang');
 });
 
-Route::get('/info', function () {
-    return view('informasi');
+Route::get('/contactus', function () {
+    return view('contact');
 });
 
 Route::get('/tutorial', function () {
@@ -59,8 +59,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'can:view_master
     Route::resource('spot', LokasiUmkmController::class); //menampilkan data lokasi umkm
     Route::resource('centre-point', CentrePointController::class); //latihan
 
+    Route::get('/meeting/menu', [MeetingController::class, 'menu'])->name('masterAdmin.meeting.menu');
+
     Route::get('/keuangan/menu', [KeuanganController::class, 'menu'])->name('keuangan.menu');
     Route::get('/keuangan/menu/show/{id}', [KeuanganController::class, 'show'])->name('keuangan.show');
+    
 
     Route::get('/cek-legal/menu', [LegalUsahaController::class, 'menu'])->name('legalUsaha.menu');
     Route::get('/cek-legal/menu/show/{id}', [LegalUsahaController::class, 'show'])->name('legalUsaha.show');

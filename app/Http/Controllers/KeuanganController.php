@@ -30,11 +30,25 @@ class KeuanganController extends Controller
      */
     public function menu()
     {
-        $uang = Keuangan::all()->map(function ($item) {
+        $uang = Keuangan::Where('status_verifikasi', 'Menunggu')->get()->map(function ($item) {
             $item->tanggal = \Carbon\Carbon::parse($item->tanggal)->format('Y-m-d');
             return $item;
         });
         return view('masterAdmin.keuangan.menu', compact('uang'));
+    }
+
+    /**
+     * Menampilkan daftar data keuangan yang perlu diverifikasi oleh admin.
+     */
+    public function verifikasiMenu()
+    {
+        $title = 'Verifikasi Keuangan';
+        $uang = Keuangan::where('status_verifikasi', 'Menunggu')->get()->map(function ($item) {
+            $item->tanggal = \Carbon\Carbon::parse($item->tanggal)->format('Y-m-d');
+            return $item;
+        });
+
+        return view('masterAdmin.keuangan.verifikasi', compact('uang', 'title'));
     }
 
     /**
@@ -61,6 +75,7 @@ class KeuanganController extends Controller
         $validatedData['tanggal'] = $validatedData['tanggal'] ?? now()->format('Y-m-d');
         $validatedData['profit_loss'] = $validatedData['income'] - $validatedData['outcome'];
         $validatedData['id_umkm'] = auth()->id();
+        $validatedData['status_verifikasi'] = 'Menunggu';
 
         if ($request->hasFile('bukti_transaksi')) {
             $validatedData['bukti_transaksi'] = $request->file('bukti_transaksi')->store('keuangan', 'public');
@@ -77,7 +92,7 @@ class KeuanganController extends Controller
      */
     public function show($id)
     {
-        $uang = Keuangan::where('id', $id)->where('id_umkm', auth()->id())->firstOrFail();
+        $uang = Keuangan::where('id', $id)->firstOrFail();
         $uang->tanggal = \Carbon\Carbon::parse($uang->tanggal)->format('Y-m-d');
         return view('masterAdmin.keuangan.show', compact('uang'));
     }
@@ -124,11 +139,27 @@ class KeuanganController extends Controller
     }
 
     /**
-     * Menghapus data keuangan.
+     * Menghapus atau memverifikasi data keuangan.
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $uang = Keuangan::where('id', $id)->where('id_umkm', auth()->id())->firstOrFail();
+        $uang = Keuangan::findOrFail($id);
+
+        if ($request->action === 'tolak') {
+            $uang->status_verifikasi = 'Ditolak';
+            $uang->save();
+
+            Alert::success('Sukses', "Laporan Keuangan Ditolak")->autoClose(1000);
+            return redirect()->back()->with('success', 'Laporan keuangan berhasil ditolak.');
+        }
+
+        if ($request->action === 'setuju') {
+            $uang->status_verifikasi = 'Disetujui';
+            $uang->save();
+
+            Alert::success('Sukses', "Laporan Keuangan Disetujui")->autoClose(1000);
+            return redirect()->back()->with('success', 'Laporan keuangan berhasil disetujui.');
+        }
 
         if ($uang->bukti_transaksi && Storage::disk('public')->exists($uang->bukti_transaksi)) {
             Storage::disk('public')->delete($uang->bukti_transaksi);

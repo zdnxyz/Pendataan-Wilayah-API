@@ -62,6 +62,28 @@ class PermissionSeeder extends Seeder
                 'password' => Hash::make('admin123'),
             ]
         );
+
+        $sample_umkm = User::firstOrCreate([
+            'name' => 'Sample UMKM',
+            'email' => 'umkm@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'),
+            'foto_profil' => null,
+            'gender' => 'pria',
+            'no_telp' => '081234567890',
+            'alamat' => 'Jl. Asia Afrika'
+        ]);
+        
+        $sample_inves = User::firstOrCreate([
+            'name' => 'Sample Investor',
+            'email' => 'investor@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('12345678'),
+            'foto_profil' => null,
+            'gender' => 'pria',
+            'no_telp' => '081234567890',
+            'alamat' => 'Jl. Asia Afrika'
+        ]);
         
 
 

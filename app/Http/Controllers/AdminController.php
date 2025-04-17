@@ -15,7 +15,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $title = 'Dasbor';
+        $title = 'Dasboard';
         $jmlUser = User::count();
 
         $jmlUserBulanLalu = User::whereMonth('created_at', Carbon::now()->subMonth()->month)

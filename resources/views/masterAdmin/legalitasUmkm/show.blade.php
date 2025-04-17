@@ -16,7 +16,6 @@
                     <table class="table align-items-center mb-0">
                         <tbody>
                             <tr>
-                                {{-- daftar pengguna --}}
                                 <td>
                                     <div class="d-flex px-5 py-1">
                                         <div class="row w-100">
@@ -37,8 +36,13 @@
                                                 <div class="p-0">
                                                     @foreach ($fields as $field)
                                                         @if (!empty($legalUsaha->$field))
-                                                        <p>{{ ucfirst(str_replace('_', ' ', $field)) }}</p> 
-                                                        <img src="{{ asset('storage/legalitas/' . $legalUsaha->$field) }}" alt="{{ $field }}" width="200" class="img-thumbnail">
+                                                            <p>{{ ucfirst(str_replace('_', ' ', $field)) }}</p> 
+                                                            <img src="{{ asset('storage/legalitas/' . $legalUsaha->$field) }}"
+                                                                 alt="{{ $field }}"
+                                                                 width="200"
+                                                                 class="img-thumbnail"
+                                                                 style="cursor: pointer;"
+                                                                 onclick="showImagePreview('{{ asset('storage/legalitas/' . $legalUsaha->$field) }}')">
                                                         @endif
                                                     @endforeach
                                                 </div>
@@ -60,3 +64,26 @@
     </div>
 </div>
 @endsection
+
+@push('javascript')
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    let table = new DataTable('#myTable');
+
+    function showImagePreview(imageUrl) {
+        Swal.fire({
+            imageUrl: imageUrl,
+            imageWidth: '80%',
+            imageAlt: 'Preview Gambar',
+            showConfirmButton: false,
+            background: '#000',
+            backdrop: 'rgba(0,0,0,0.8)',
+            customClass: {
+                popup: 'rounded-lg'
+            }
+        });
+    }
+</script>
+@endpush

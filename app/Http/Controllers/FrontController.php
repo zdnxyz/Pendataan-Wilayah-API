@@ -15,7 +15,7 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $title = 'Dasbor';
+        $title = 'Dashboard';
         $uang = Keuangan::where('id_umkm', auth()->id())->get();
 
         $uang = $uang->map(function ($data) {
